@@ -101,45 +101,9 @@ $ docker run -p 3000:3000 franzsee/ccxt-rest
      -d '["1stParameter", {"2ndParameter":"value"}, "etc"]'
     ```
 
-_Note:_
-- [CCXT REST](#ccxt-rest)
-  - [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Getting Started](#getting-started)
-    - [Installation](#installation)
-      - [NPM Package](#npm-package)
-      - [Docker](#docker)
-  - [TLDR](#tldr)
-  - [Common APIs](#common-apis)
-    - [Fecthing the markets](#fecthing-the-markets)
-    - [Fetching ticker](#fetching-ticker)
-    - [Creating an order](#creating-an-order)
-    - [Fetch open orders](#fetch-open-orders)
-    - [Cancelling an order](#cancelling-an-order)
-  - [API](#api)
-  - [Feature / Support Request](#feature--support-request)
-
-
 ## Common APIs
 
 Once you have an exchange instance, you can then start calling methods of that exchange instance by supplying the following:
-
-- [CCXT REST](#ccxt-rest)
-  - [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Getting Started](#getting-started)
-    - [Installation](#installation)
-      - [NPM Package](#npm-package)
-      - [Docker](#docker)
-  - [TLDR](#tldr)
-  - [Common APIs](#common-apis)
-    - [Fecthing the markets](#fecthing-the-markets)
-    - [Fetching ticker](#fetching-ticker)
-    - [Creating an order](#creating-an-order)
-    - [Fetch open orders](#fetch-open-orders)
-    - [Cancelling an order](#cancelling-an-order)
-  - [API](#api)
-  - [Feature / Support Request](#feature--support-request)
 
 The format to call any exchange instance method is the following:
 
@@ -228,22 +192,6 @@ Again, the format to call a ccxt exchange method is the following
 $ curl -X POST http://localhost:3000/exchanges/{{exchangeName}}/{{method}} -d '["1stParameter", {"2ndParameter":"value"}, "etc"]'
 ```
 
-- [CCXT REST](#ccxt-rest)
-  - [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Getting Started](#getting-started)
-    - [Installation](#installation)
-      - [NPM Package](#npm-package)
-      - [Docker](#docker)
-  - [TLDR](#tldr)
-  - [Common APIs](#common-apis)
-    - [Fecthing the markets](#fecthing-the-markets)
-    - [Fetching ticker](#fetching-ticker)
-    - [Creating an order](#creating-an-order)
-    - [Fetch open orders](#fetch-open-orders)
-    - [Cancelling an order](#cancelling-an-order)
-  - [API](#api)
-  - [Feature / Support Request](#feature--support-request)
 
 As of this writing, these are the documented methods in CCXT.
 
