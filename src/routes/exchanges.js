@@ -1,6 +1,5 @@
 var ccxt = require ('ccxt')
   , CircularJSON = require('circular-json')
-  , db = require('./../db')
   , express = require('express');
 
 module.exports =  function(app) {
@@ -15,54 +14,16 @@ module.exports =  function(app) {
     res.send(CircularJSON.stringify(ccxt.exchanges));
   });
 
-  router.get('/:exchangeName', function(req, res, next) {
+  router.post('/:exchangeName/:methodName', wrap(async function(req, res) {
     var exchangeName = req.params.exchangeName;
-    var exchangeIds = db.getExchangeIds(exchangeName);
-    res.send(CircularJSON.stringify(exchangeIds));
-  });
-
-  router.post('/:exchangeName', function(req, res, next) {
-    var reqBody = req.body;
-    var exchangeName = req.params.exchangeName;
-
-    var exchange = new ccxt[exchangeName](reqBody);
-    db.saveExchange(exchangeName, exchange);
-    
-    res.send(CircularJSON.stringify(exchange));
-  });
-
-  router.get('/:exchangeName/:exchangeId', function(req, res, next) {
-    var exchangeName = req.params.exchangeName;
-    var exchangeId = req.params.exchangeId
-    var exchange = db.getExchange(exchangeName, exchangeId);
-    if (exchange) {
-      res.send(CircularJSON.stringify(exchange));
-    } else {
-      res.sendStatus(404);
-    }
-    
-  });
-
-  router.delete('/:exchangeName/:exchangeId', function(req, res, next) {
-    var exchangeName = req.params.exchangeName;
-    var exchangeId = req.params.exchangeId
-
-    var exchange = db.deleteExchange(exchangeName, exchangeId);
-    
-    if (exchange) {
-      res.send(CircularJSON.stringify(exchange));
-    } else {
-      res.sendStatus(404);
-    }
-  });
-
-  router.post('/:exchangeName/:exchangeId/:methodName', wrap(async function(req, res) {
-    var exchangeName = req.params.exchangeName;
-    var exchangeId = req.params.exchangeId
     var methodName = req.params.methodName
     var reqBody = req.body;
-    
-    var exchange = db.getExchange(exchangeName, exchangeId);
+
+    var exchange = new ccxt[exchangeName]({
+      apiKey: req.header('apiKey'),
+      secret: req.header('secret'),
+      timeout: req.header('timeout'),
+    });
 
     if (!exchange) {
       res.sendStatus(404);
